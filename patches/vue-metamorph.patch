@@ -1,0 +1,27 @@
+diff --git a/dist/main.js b/dist/main.js
+index 0c1f4080b23e8ab8f7f152ed29e8fe2254652883..511c788b0802ff427114f4d2529e4a3a104fb5e6 100644
+--- a/dist/main.js
++++ b/dist/main.js
+@@ -103,14 +103,18 @@ function stringifyVDirectiveKey(node) {
+   return str;
+ }
+ function stringifyVLiteral(node) {
+-  return node.value;
++  return `"${node.value}"`
+ }
+ function stringifyVAttribute(node) {
+-  let str = node.directive ? stringifyVDirectiveKey(node.key) : node.key.rawName;
++  let str = node.directive ? stringifyVDirectiveKey(node.key) : node.key.rawName
+   if (node.value) {
+-    str += `="${stringify(node.value)}"`;
++    if (node.value.type === 'VLiteral') {
++      str += `="${node.value.value}"`
++    } else {
++      str += `="${stringify(node.value)}"`
++    }
+   }
+-  return str;
++  return str
+ }
+ function stringifyVStartTag(node, isVoidElement = false) {
+   let str = "";

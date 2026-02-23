@@ -1,0 +1,5 @@
+ignoredBuiltDependencies:
+  - esbuild
+
+patchedDependencies:
+  vue-metamorph: patches/vue-metamorph.patch
