@@ -35,9 +35,9 @@ export function findSlotNodes (
         (
           node.parent.parent.name === 'template'
           && node.parent.parent.parent.type === 'VElement'
-          && components.includes(camelize(node.parent.parent.parent.rawName))
+          && components.includes(classify(node.parent.parent.parent.rawName))
         )
-        || components.includes(camelize(node.parent.parent.rawName))
+        || components.includes(classify(node.parent.parent.rawName))
       )
     )) return false
     if (slots && !(
