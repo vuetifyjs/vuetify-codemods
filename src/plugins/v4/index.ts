@@ -3,6 +3,7 @@ import { v4ComboboxItemSlotPlugin } from './combobox-item-slot'
 import { v4ElevationPlugin } from './elevation'
 import { v4SnackbarMultilinePlugin } from './snackbar-multiline'
 import { v4SnackbarQueueSlotPlugin } from './snackbar-queue-slot'
+import { v4TypographyPlugin } from './typography'
 
 export function vuetify4 (): Plugin[] {
   return [
@@ -10,5 +11,6 @@ export function vuetify4 (): Plugin[] {
     v4ElevationPlugin,
     v4SnackbarMultilinePlugin,
     v4SnackbarQueueSlotPlugin,
+    v4TypographyPlugin,
   ]
 }
