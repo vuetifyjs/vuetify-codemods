@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite'
-import pkg from './package.json'
 
 export default defineConfig({
   build: {
+    ssr: true,
+    target: 'node22',
     minify: false,
 
     lib: {
       entry: 'src/main.ts',
-      fileName: 'cli',
       formats: ['es'],
     },
 
@@ -15,19 +15,11 @@ export default defineConfig({
       output: {
         banner: '#!/usr/bin/env node',
       },
-      external: [
-        'fs',
-        'path',
-        'os',
-        'ast-types',
-        '@babel/parser',
-        'source-map',
-        'assert',
-        'tslib',
-        'fs/promises',
-        'process',
-        ...Object.keys(pkg.dependencies),
-      ],
     },
+  },
+  ssr: {
+    noExternal: [
+      'vue-metamorph',
+    ],
   },
 })

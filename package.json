@@ -1,16 +1,19 @@
 {
   "name": "vuetify-codemods",
   "type": "module",
+  "version": "1.0.0",
   "bin": {
-    "vuetify-codemods": "dist/cli.js"
+    "vuetify-codemods": "dist/main.js"
   },
   "scripts": {
-    "build": "tsc && vite build && chmod +x dist/cli.js",
+    "build": "tsc && vite build && chmod +x dist/main.js",
     "lint": "eslint . --ext .ts",
     "test": "vitest"
   },
   "dependencies": {
-    "vue-metamorph": "^3.2.0"
+    "esprima": "^4.0.1",
+    "lodash-es": "^4.17.23",
+    "vue-eslint-parser": "^10.4.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.13",
@@ -19,7 +22,7 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vitest": "^4.0.18",
-    "vue-eslint-parser": "^10.4.0"
+    "vue-metamorph": "^3.2.0"
   },
   "packageManager": "pnpm@10.30.0"
 }

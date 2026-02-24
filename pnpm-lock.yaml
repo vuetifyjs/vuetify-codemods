@@ -13,9 +13,15 @@ importers:
 
   .:
     dependencies:
-      vue-metamorph:
-        specifier: ^3.2.0
-        version: 3.3.3(patch_hash=bb3898882aaf61618b33cf1481b1b4057ac89c772a8515357cf0cc74f70548a0)(eslint@9.39.2)
+      esprima:
+        specifier: ^4.0.1
+        version: 4.0.1
+      lodash-es:
+        specifier: ^4.17.23
+        version: 4.17.23
+      vue-eslint-parser:
+        specifier: ^10.4.0
+        version: 10.4.0(eslint@9.39.2)
     devDependencies:
       '@types/node':
         specifier: ^24.10.13
@@ -35,9 +41,9 @@ importers:
       vitest:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@24.10.13)(stylus@0.57.0)(yaml@2.8.2)
-      vue-eslint-parser:
-        specifier: ^10.4.0
-        version: 10.4.0(eslint@9.39.2)
+      vue-metamorph:
+        specifier: ^3.2.0
+        version: 3.3.3(patch_hash=bb3898882aaf61618b33cf1481b1b4057ac89c772a8515357cf0cc74f70548a0)(eslint@9.39.2)
 
 packages:
 
@@ -931,6 +937,11 @@ packages:
   espree@9.6.1:
     resolution: {integrity: sha512-oruZaFkjorTpF32kDSI5/75ViwGeZginGGy2NoOSg3Q9bnwlnmDm4HLnkl0RE3n+njDXR037aY1+x58Z/zFdwQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  esprima@4.0.1:
+    resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
+    engines: {node: '>=4'}
+    hasBin: true
 
   esquery@1.7.0:
     resolution: {integrity: sha512-Ap6G0WQwcU/LHsvLwON1fAQX9Zp0A2Y6Y/cJBl9r/JbW90Zyg4/zbG6zzKa2OTALELarYHmKu0GhpM5EO+7T0g==}
@@ -2522,6 +2533,8 @@ snapshots:
       acorn: 8.15.0
       acorn-jsx: 5.3.2(acorn@8.15.0)
       eslint-visitor-keys: 3.4.3
+
+  esprima@4.0.1: {}
 
   esquery@1.7.0:
     dependencies:
