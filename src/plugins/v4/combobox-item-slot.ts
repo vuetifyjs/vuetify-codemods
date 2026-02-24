@@ -1,41 +1,20 @@
 import type { AST } from 'vue-eslint-parser'
 import type { CodemodPlugin } from 'vue-metamorph'
-import { camelize } from '../../helpers'
+import { findSlotNodes } from '../../helpers'
 
 export const v4ComboboxItemSlotPlugin: CodemodPlugin = {
   type: 'codemod',
   name: 'vuetify-4-combobox-item-slot',
-  transform ({ sfcAST, utils: { astHelpers } }) {
+  transform ({ sfcAST }) {
     if (!sfcAST) return 0
     let count = 0
-    // find <template #item />
-    const itemSlotNodes = astHelpers.findAll(sfcAST, {
-      type: 'VAttribute',
-      directive: true,
-      key: {
-        type: 'VDirectiveKey',
-        name: {
-          type: 'VIdentifier',
-          name: 'slot',
-        },
-        argument: {
-          type: 'VIdentifier',
-          name: 'item',
-        },
-      },
-      parent: {
-        type: 'VStartTag',
-        parent: {
-          type: 'VElement',
-          name: 'template',
-        },
-      },
-    }).filter(node => {
-      return node.parent.parent.parent.type === 'VElement'
-        && ['VSelect', 'VAutocomplete', 'VCombobox'].includes(camelize(node.parent.parent.parent.rawName))
-    })
+    const slotNodes = findSlotNodes(
+      sfcAST,
+      ['VSelect', 'VAutocomplete', 'VCombobox'],
+      ['item', 'chip', 'selection'],
+    )
 
-    for (const node of itemSlotNodes) {
+    for (const node of slotNodes) {
       if (
         !node.value
         || node.value.type !== 'VExpressionContainer'
