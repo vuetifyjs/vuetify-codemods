@@ -4,7 +4,7 @@ import { camelize, classify } from '../../helpers'
 export const v4SnackbarMultilinePlugin: CodemodPlugin = {
   type: 'codemod',
   name: 'vuetify-4-snackbar-multiline',
-  transform ({ sfcAST, utils: { traverseTemplateAST } }) {
+  transform ({ sfcAST, utils: { builders, traverseTemplateAST } }) {
     if (!sfcAST) return 0
     let count = 0
     traverseTemplateAST(sfcAST, {
@@ -24,18 +24,9 @@ export const v4SnackbarMultilinePlugin: CodemodPlugin = {
             )
 
             if (!hasMinHeight) {
-              node.startTag.attributes.push({
-                type: 'VAttribute',
-                directive: false,
-                key: {
-                  type: 'VIdentifier',
-                  rawName: 'min-height',
-                },
-                value: {
-                  type: 'VLiteral',
-                  value: '68',
-                },
-              } as any)
+              node.startTag.attributes.push(
+                builders.vAttribute(builders.vIdentifier('min-height'), builders.vLiteral('68')),
+              )
             }
 
             count++
