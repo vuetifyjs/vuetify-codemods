@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@inquirer/prompts": "^8.3.0",
     "esprima": "^4.0.1",
     "lodash-es": "^4.17.23",
     "vue-eslint-parser": "^10.4.0"
