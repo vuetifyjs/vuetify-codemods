@@ -1,4 +1,5 @@
 import type { namedTypes } from 'ast-types-x'
+import type { AST as VueAST } from 'vue-eslint-parser'
 import type { AST, CodemodPluginContext } from 'vue-metamorph'
 import { astHelpers } from 'vue-metamorph'
 
@@ -53,6 +54,68 @@ export function findSlotNodes (
     )) return false
     return true
   })
+}
+
+export type Ref = { prop: namedTypes.Property | null, reference: VueAST.ESLintIdentifier }
+export function findSlotPropReferences (
+  slot: AST.VAttribute | AST.VDirective,
+  props: string[] | null,
+) {
+  const results: Ref[] = []
+  if (
+    !slot.value
+    || slot.value.type !== 'VExpressionContainer'
+    || slot.value.expression?.type !== 'VSlotScopeExpression'
+  ) return results
+  const slotExpression = slot.value.expression
+  // vue-metamorph has its own incomplete AST types for some
+  // reason instead of re-exporting them from vue-eslint-parser
+  const templateElement = slot.parent.parent as unknown as VueAST.VElement
+
+  const searchProps = new Set(props)
+
+  if (slotExpression.params.length === 1 && slotExpression.params[0]!.type === 'ObjectPattern') {
+    // Destructured props (v-slot="{ prop }")
+    for (const prop of slotExpression.params[0].properties) {
+      if (
+        prop.type === 'Property'
+        && prop.key.type === 'Identifier'
+        && searchProps.has(prop.key.name)
+      ) {
+        const variable = templateElement.variables.find(v =>
+          prop.value.type === 'Identifier'
+          && v.id.name === prop.value.name,
+        )
+        if (!variable) continue
+        for (const reference of variable.references) {
+          results.push({
+            prop,
+            reference: reference.id,
+          })
+        }
+      }
+    }
+  } else if (slotExpression.params.length === 1 && slotExpression.params[0]!.type === 'Identifier') {
+    // Non-destructured (v-slot="data")
+    const paramName = slotExpression.params[0].name
+    const paramVariable = templateElement.variables.find(v => v.id.name === paramName)
+    if (paramVariable) {
+      for (const reference of paramVariable.references) {
+        const memberExpr = reference.id.parent
+        if (
+          memberExpr?.type === 'MemberExpression'
+          && memberExpr.property.type === 'Identifier'
+          && searchProps.has(memberExpr.property.name)
+        ) {
+          results.push({
+            prop: null,
+            reference: memberExpr.property,
+          })
+        }
+      }
+    }
+  }
+  return results
 }
 
 // A map of components and props that should be treated the same as class
@@ -157,4 +220,40 @@ export function findClassNodes (ast: AST.VDocumentFragment, utils: CodemodPlugin
   }
 
   return results
+}
+
+export function removeDotMember (ref: VueAST.ESLintIdentifier, name: string) {
+  let current: VueAST.Node = ref
+  let count = 0
+
+  while (current?.parent) {
+    const parent: VueAST.Node = current.parent
+    if (parent.type !== 'MemberExpression') break
+
+    if (
+      parent.property.type === 'Identifier'
+      && parent.property.name === name
+      && !parent.computed
+      && parent.parent
+    ) {
+      if (replaceChildNode(parent.parent, parent, current)) {
+        count++
+      }
+      break
+    }
+
+    current = parent
+  }
+
+  return count
+}
+
+function replaceChildNode (parent: VueAST.Node, oldChild: VueAST.Node, newChild: VueAST.Node) {
+  for (const key of Object.keys(parent)) {
+    if ((parent as any)[key] === oldChild) {
+      (parent as any)[key] = newChild
+      return true
+    }
+  }
+  return false
 }
