@@ -1,5 +1,5 @@
 diff --git a/dist/main.js b/dist/main.js
-index 0c1f4080b23e8ab8f7f152ed29e8fe2254652883..511c788b0802ff427114f4d2529e4a3a104fb5e6 100644
+index 0c1f4080b23e8ab8f7f152ed29e8fe2254652883..d1f0d9403b904fb25b1c93b6fbcea0988e668c07 100644
 --- a/dist/main.js
 +++ b/dist/main.js
 @@ -103,14 +103,18 @@ function stringifyVDirectiveKey(node) {
@@ -25,3 +25,14 @@ index 0c1f4080b23e8ab8f7f152ed29e8fe2254652883..511c788b0802ff427114f4d2529e4a3a
  }
  function stringifyVStartTag(node, isVoidElement = false) {
    let str = "";
+@@ -935,10 +939,6 @@ function transformVueFile(code, filename, codemods, opts) {
+         if (path.at(-2) === "key") {
+           path.pop();
+         }
+-        if (path.at(-1) === "expression") {
+-          path.pop();
+-          path.pop();
+-        }
+         if (path.at(-1) === "body") {
+           path.pop();
+         }

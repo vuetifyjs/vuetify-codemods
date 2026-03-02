@@ -17,9 +17,7 @@ it('destructured', () => {
     "
     <template>
       <VForm>
-        <template #default="{
-      isValid,
-    }">
+        <template #default="{ isValid }">
           {{ isValid }}
         </template>
       </VForm>

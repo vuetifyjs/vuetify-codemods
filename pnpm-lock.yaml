@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   vue-metamorph:
-    hash: bb3898882aaf61618b33cf1481b1b4057ac89c772a8515357cf0cc74f70548a0
+    hash: c1019a98a340acad0734977c82539d09d7cf155c92a3bd31834b7391377eacaa
     path: patches/vue-metamorph.patch
 
 importers:
@@ -49,7 +49,7 @@ importers:
         version: 4.0.18(@types/node@24.10.13)(stylus@0.57.0)(yaml@2.8.2)
       vue-metamorph:
         specifier: ^3.2.0
-        version: 3.3.3(patch_hash=bb3898882aaf61618b33cf1481b1b4057ac89c772a8515357cf0cc74f70548a0)(eslint@9.39.2)
+        version: 3.3.3(patch_hash=c1019a98a340acad0734977c82539d09d7cf155c92a3bd31834b7391377eacaa)(eslint@9.39.2)
 
 packages:
 
@@ -3485,7 +3485,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-metamorph@3.3.3(patch_hash=bb3898882aaf61618b33cf1481b1b4057ac89c772a8515357cf0cc74f70548a0)(eslint@9.39.2):
+  vue-metamorph@3.3.3(patch_hash=c1019a98a340acad0734977c82539d09d7cf155c92a3bd31834b7391377eacaa)(eslint@9.39.2):
     dependencies:
       '@babel/parser': 8.0.0-alpha.12
       ast-types-x: 1.18.0
