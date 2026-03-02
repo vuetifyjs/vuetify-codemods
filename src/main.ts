@@ -37,6 +37,12 @@ try {
         checked: true,
       },
       {
+        value: 'vuetify-4-grid',
+        name: 'Grid',
+        description: 'https://vuetifyjs.com/en/getting-started/upgrade-guide/#grid-system-vrow-and-vcol',
+        checked: true,
+      },
+      {
         value: 'vuetify-4-snackbar-multiline',
         name: 'Snackbar multi-line',
         description: 'https://vuetifyjs.com/en/getting-started/upgrade-guide/#vsnackbar',
