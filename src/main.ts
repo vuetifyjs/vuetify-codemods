@@ -31,6 +31,12 @@ try {
         checked: true,
       },
       {
+        value: 'vuetify-4-form-slot-refs',
+        name: 'Form slot refs',
+        description: 'https://vuetifyjs.com/en/getting-started/upgrade-guide/#vform',
+        checked: true,
+      },
+      {
         value: 'vuetify-4-snackbar-multiline',
         name: 'Snackbar multi-line',
         description: 'https://vuetifyjs.com/en/getting-started/upgrade-guide/#vsnackbar',
