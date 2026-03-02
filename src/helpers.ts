@@ -167,7 +167,7 @@ const classProps = new Map<string, string | string[]>([
 ])
 
 export function findClassNodes (ast: AST.VDocumentFragment, utils: CodemodPluginContext['utils'], match: string[]) {
-  const matchingRegexp = new RegExp(String.raw`(^|\s)(?:${match.join('|')})(?=$|\s)`, 'g')
+  const matchingRegexp = new RegExp(String.raw`(^|\s)(?:${match.join('|')})(?=$|\s)`)
 
   const results: (AST.VLiteral | namedTypes.Literal | namedTypes.Identifier)[] = []
 

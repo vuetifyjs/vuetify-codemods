@@ -1,6 +1,5 @@
 import type { CodemodPlugin } from 'vue-metamorph'
 import { findClassNodes } from '../../helpers'
-// import { camelize, classify } from '../../helpers'
 
 const replacements: Record<string, string> = {
   'text-h1': 'text-display-large',

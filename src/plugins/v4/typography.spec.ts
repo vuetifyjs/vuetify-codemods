@@ -2,7 +2,7 @@ import { expect, it } from 'vitest'
 import { transform } from 'vue-metamorph'
 import { v4TypographyPlugin } from './typography'
 
-it('', () => {
+it('replaces classes', () => {
   const input = `
 <template>
   <div class="text-h1" />
