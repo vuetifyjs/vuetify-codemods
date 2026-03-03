@@ -25,6 +25,8 @@
   "devDependencies": {
     "@types/node": "^24.10.13",
     "ast-types-x": "^1.18.0",
+    "conventional-changelog-cli": "^5.0.0",
+    "conventional-changelog-vuetify": "^2.0.2",
     "eslint": "^9.39.2",
     "eslint-config-vuetify": "4.3.5-beta.1",
     "typescript": "^5.9.3",
