@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "@inquirer/prompts": "^8.3.0",
+    "ast-types-x": "^1.18.0",
     "esprima": "^4.0.1",
     "lodash-es": "^4.17.23",
     "vue-eslint-parser": "^10.4.0"
@@ -28,7 +29,6 @@
   "devDependencies": {
     "@types/node": "^24.10.13",
     "@vuetify/github-releaser": "^4.0.3",
-    "ast-types-x": "^1.18.0",
     "conventional-changelog-cli": "^5.0.0",
     "conventional-changelog-vuetify": "^2.0.2",
     "eslint": "^9.39.2",
