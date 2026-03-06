@@ -13,6 +13,7 @@ export const v4SnackbarQueueSlotPlugin: CodemodPlugin = {
         if (!node.key.argument) {
           node.key.name.rawName = '#'
           node.key.argument = builders.vIdentifier('item')
+          builders.setParents(node.key)
           count++
         } else if (node.key.argument.type === 'VIdentifier') {
           node.key.argument.rawName = 'item'

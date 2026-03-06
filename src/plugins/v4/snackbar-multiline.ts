@@ -27,6 +27,7 @@ export const v4SnackbarMultilinePlugin: CodemodPlugin = {
               node.startTag.attributes.push(
                 builders.vAttribute(builders.vIdentifier('min-height'), builders.vLiteral('68')),
               )
+              builders.setParents(node.startTag)
             }
 
             count++

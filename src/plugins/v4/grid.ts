@@ -30,6 +30,7 @@ export const v4GridPlugin: CodemodPlugin = {
               builders.vIdentifier('density'),
               builders.vLiteral('compact'),
             ))
+          builders.setParents(el.startTag)
           count++
         }
 
@@ -85,6 +86,7 @@ function appendStaticClass (el: AST.VElement, cls: string, builders: Builders) {
         builders.vLiteral(cls),
       ),
     )
+    builders.setParents(el.startTag)
   }
 }
 
