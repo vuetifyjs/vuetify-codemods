@@ -1,5 +1,5 @@
 import type { CodemodPlugin } from 'vue-metamorph'
-import { findSlotNodes } from '../../helpers'
+import { findSlotNodes, setParents } from '../../helpers'
 
 export const v4SnackbarQueueSlotPlugin: CodemodPlugin = {
   type: 'codemod',
@@ -13,7 +13,7 @@ export const v4SnackbarQueueSlotPlugin: CodemodPlugin = {
         if (!node.key.argument) {
           node.key.name.rawName = '#'
           node.key.argument = builders.vIdentifier('item')
-          builders.setParents(node.key)
+          setParents(node.key, builders)
           count++
         } else if (node.key.argument.type === 'VIdentifier') {
           node.key.argument.rawName = 'item'

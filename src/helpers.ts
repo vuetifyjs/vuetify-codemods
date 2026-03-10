@@ -257,3 +257,10 @@ function replaceChildNode (parent: VueAST.Node, oldChild: VueAST.Node, newChild:
   }
   return false
 }
+
+type Builders = CodemodPluginContext['utils']['builders']
+export function setParents (node: AST.Node, builders: Builders) {
+  const parent = node.parent
+  builders.setParents(node)
+  node.parent = parent
+}

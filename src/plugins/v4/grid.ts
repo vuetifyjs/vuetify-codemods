@@ -1,6 +1,6 @@
 import type { AST, CodemodPlugin, CodemodPluginContext } from 'vue-metamorph'
 import { astHelpers } from 'vue-metamorph'
-import { classify } from '../../helpers'
+import { classify, setParents } from '../../helpers'
 
 type Builders = CodemodPluginContext['utils']['builders']
 
@@ -30,7 +30,7 @@ export const v4GridPlugin: CodemodPlugin = {
               builders.vIdentifier('density'),
               builders.vLiteral('compact'),
             ))
-          builders.setParents(el.startTag)
+          setParents(el.startTag, builders)
           count++
         }
 
@@ -86,7 +86,7 @@ function appendStaticClass (el: AST.VElement, cls: string, builders: Builders) {
         builders.vLiteral(cls),
       ),
     )
-    builders.setParents(el.startTag)
+    setParents(el.startTag, builders)
   }
 }
 
