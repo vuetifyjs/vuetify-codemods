@@ -1,7 +1,7 @@
 {
   "name": "vuetify-codemods",
   "type": "module",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "bin": {
     "vuetify-codemods": "dist/main.js"
   },
