@@ -209,8 +209,17 @@ export function findClassNodes (ast: AST.VDocumentFragment, utils: CodemodPlugin
           results.push(node)
         } else if (
           node.type === 'Property'
-          && (node.key.type === 'Literal'
-            || (node.key.type === 'Identifier' && !node.computed)
+          && (
+            (
+              node.key.type === 'Literal'
+              && typeof node.key.value === 'string'
+              && matchingRegexp.test(node.key.value)
+            )
+            || (
+              node.key.type === 'Identifier'
+              && !node.computed
+              && matchingRegexp.test(node.key.name)
+            )
           )
         ) {
           results.push(node.key)
