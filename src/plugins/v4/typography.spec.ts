@@ -29,3 +29,23 @@ it('replaces classes', () => {
     "
   `)
 })
+
+it('replaces classes with breakpoints', () => {
+  const input = `
+<template>
+  <div class="text-h1" />
+  <div class="text-md-h1" />
+  <div :class="{ 'text-md-center': true }" />
+</template>
+`
+
+  expect(transform(input, 'file.vue', [v4TypographyPlugin]).code).toMatchInlineSnapshot(`
+    "
+    <template>
+      <div class="text-display-large" />
+      <div class="text-md-display-large" />
+      <div :class="{ 'text-md-center': true }" />
+    </template>
+    "
+  `)
+})

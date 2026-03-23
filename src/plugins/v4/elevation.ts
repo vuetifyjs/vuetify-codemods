@@ -51,7 +51,6 @@ const elevationComponents = new Set([
 const mapping = [0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5]
 
 const elevationMatch = String.raw`elevation-(\d{1,2})`
-const elevationRegexp = new RegExp(String.raw`(^|\s)${elevationMatch}(?=$|\s)`, 'g')
 
 export const v4ElevationPlugin: CodemodPlugin = {
   type: 'codemod',
@@ -61,13 +60,13 @@ export const v4ElevationPlugin: CodemodPlugin = {
     let count = 0
 
     // Match classes
-    const found = findClassNodes(sfcAST, utils, [elevationMatch])
-    for (const node of found) {
+    const { results, matchingRegexp } = findClassNodes(sfcAST, utils, [elevationMatch])
+    for (const node of results) {
       if (node.type === 'Identifier') {
-        node.name = node.name.replaceAll(elevationRegexp, (_, s, n) => `${s}elevation-${mapping[Number(n)]}`)
+        node.name = node.name.replaceAll(matchingRegexp, (_, s, n) => `${s}elevation-${mapping[Number(n)]}`)
         count++
       } else if (typeof node.value === 'string') {
-        node.value = node.value.replaceAll(elevationRegexp, (_, s, n) => `${s}elevation-${mapping[Number(n)]}`)
+        node.value = node.value.replaceAll(matchingRegexp, (_, s, n) => `${s}elevation-${mapping[Number(n)]}`)
         count++
       }
     }

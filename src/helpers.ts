@@ -228,7 +228,7 @@ export function findClassNodes (ast: AST.VDocumentFragment, utils: CodemodPlugin
     })
   }
 
-  return results
+  return { results, matchingRegexp: new RegExp(matchingRegexp, 'g') }
 }
 
 export function removeDotMember (ref: VueAST.ESLintIdentifier, name: string) {

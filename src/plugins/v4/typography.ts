@@ -1,23 +1,24 @@
 import type { CodemodPlugin } from 'vue-metamorph'
 import { findClassNodes } from '../../helpers'
 
+const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const
 const replacements: Record<string, string> = {
-  'text-h1': 'text-display-large',
-  'text-h2': 'text-display-medium',
-  'text-h3': 'text-display-small',
-  'text-h4': 'text-headline-large',
-  'text-h5': 'text-headline-medium',
-  'text-h6': 'text-headline-small',
-  'text-subtitle-1': 'text-body-large',
-  'text-subtitle-2': 'text-label-large',
-  'text-body-1': 'text-body-large',
-  'text-body-2': 'text-body-medium',
-  'text-caption': 'text-body-small',
-  'text-button': 'text-label-large',
-  'text-overline': 'text-label-small',
+  'h1': '-display-large',
+  'h2': '-display-medium',
+  'h3': '-display-small',
+  'h4': '-headline-large',
+  'h5': '-headline-medium',
+  'h6': '-headline-small',
+  'subtitle-1': '-body-large',
+  'subtitle-2': '-label-large',
+  'body-1': '-body-large',
+  'body-2': '-body-medium',
+  'caption': '-body-small',
+  'button': '-label-large',
+  'overline': '-label-small',
 }
 
-const matchingRegexp = new RegExp(String.raw`(^|\s)(${Object.keys(replacements).join('|')})(?=$|\s)`, 'g')
+const matcher = String.raw`text(-(?:${breakpoints.join('|')}))?-(${Object.keys(replacements).join('|')})`
 
 export const v4TypographyPlugin: CodemodPlugin = {
   type: 'codemod',
@@ -25,13 +26,13 @@ export const v4TypographyPlugin: CodemodPlugin = {
   transform ({ sfcAST, utils }) {
     if (!sfcAST) return 0
     let count = 0
-    const found = findClassNodes(sfcAST, utils, Object.keys(replacements))
-    for (const node of found) {
+    const { results, matchingRegexp } = findClassNodes(sfcAST, utils, [matcher])
+    for (const node of results) {
       if (node.type === 'Identifier') {
-        node.name = node.name.replaceAll(matchingRegexp, (_, s, m) => `${s}${replacements[m]}`)
+        node.name = node.name.replaceAll(matchingRegexp, (_, s, b, m) => `${s}text${b || ''}${replacements[m]}`)
         count++
       } else if (typeof node.value === 'string') {
-        node.value = node.value.replaceAll(matchingRegexp, (_, s, m) => `${s}${replacements[m]}`)
+        node.value = node.value.replaceAll(matchingRegexp, (_, s, b, m) => `${s}text${b || ''}${replacements[m]}`)
         count++
       }
     }
