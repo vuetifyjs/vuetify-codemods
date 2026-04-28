@@ -4,18 +4,18 @@ import { findClassNodes } from '../../helpers'
 const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const
 const replacements: Record<string, string> = {
   'h1': '-display-large',
-  'h2': '-display-medium',
-  'h3': '-display-small',
+  'h2': '-display-large',
+  'h3': '-display-medium',
   'h4': '-headline-large',
-  'h5': '-headline-medium',
-  'h6': '-headline-small',
+  'h5': '-headline-small',
+  'h6': '-title-large',
   'subtitle-1': '-body-large',
-  'subtitle-2': '-label-large',
+  'subtitle-2': '-title-small',
   'body-1': '-body-large',
   'body-2': '-body-medium',
   'caption': '-body-small',
   'button': '-label-large',
-  'overline': '-label-small',
+  'overline': '-label-medium',
 }
 
 const matcher = String.raw`text(-(?:${breakpoints.join('|')}))?-(${Object.keys(replacements).join('|')})`
