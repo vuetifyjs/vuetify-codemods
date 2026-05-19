@@ -1,8 +1,10 @@
 import { execSync } from 'node:child_process'
 import process from 'node:process'
-import { checkbox, confirm } from '@inquirer/prompts'
+import { checkbox, confirm, input } from '@inquirer/prompts'
 import { createVueMetamorphCli } from 'vue-metamorph'
 import { vuetify4 } from './plugins/v4'
+
+const argv = (...args: string[]) => ['node', 'cli', ...args];
 
 try {
   try {
@@ -13,6 +15,8 @@ try {
     })
     if (!cont) process.exit()
   }
+
+  const path = await input({ message: "Target directory:", default: "." })
 
   const choices = await checkbox({
     message: 'Select codemods to apply',
@@ -75,7 +79,7 @@ try {
   process.on('SIGTERM', cli.abort)
   process.on('SIGINT', cli.abort)
 
-  await cli.run()
+  await cli.run(argv('--files', `${path}/**/*`, ))
 } catch (error) {
   if (!(error instanceof Error && error.name === 'ExitPromptError')) {
     throw error
