@@ -9,7 +9,7 @@
   <a href="https://www.npmjs.com/package/vuetify-codemods"><img src="https://img.shields.io/npm/v/vuetify-codemods.svg" alt="npm version"></a>
   <a href="https://npm.chart.dev/vuetify-codemods"><img src="https://img.shields.io/npm/dm/vuetify-codemods?color=blue" alt="npm downloads"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
-  <a href="https://discord.gg/vuetify"><img src="https://discord.com/api/guilds/1513968811047522396/widget.png" alt="Discord"></a>
+  <a href="https://discord.gg/vuetify"><img src="https://img.shields.io/discord/1513968811047522396?logo=discord&logoColor=white&label=Discord&color=5865F2" alt="Discord"></a>
 </p>
 
 # Vuetify Codemods
